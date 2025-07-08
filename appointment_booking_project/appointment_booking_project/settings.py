@@ -27,14 +27,22 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'coach_app.CustomUser'
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGOUT_REDIRECT_URL = 'home'
+
+
 
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
+    'coach_app',
+    'api',
     "django.contrib.admin",
     "django.contrib.auth",
+    'django.contrib.sessions',
     "django.contrib.contenttypes",
-    "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
@@ -48,6 +56,15 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',  # <- opens access (for testing only)
+    ],
+    'DEFAULT_FILTER_BACKENDS': [
+        'rest_framework.filters.SearchFilter',
+    ],
+}
 
 ROOT_URLCONF = "appointment_booking_project.urls"
 

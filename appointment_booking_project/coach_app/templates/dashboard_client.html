@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Dashboard - Client</h2>
+
+<h3>Upcoming Sessions</h3>
+{% if upcoming_sessions %}
+    <ul>
+    {% for session in upcoming_sessions %}
+        <li>
+            {{ session.timeslot.date }} at {{ session.timeslot.start_time }} – {{ session.subject }}
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No upcoming sessions.</p>
+{% endif %}
+
+<hr>
+
+<h3>Past Sessions</h3>
+{% if past_sessions %}
+    <ul>
+    {% for session in past_sessions %}
+        <li>
+            {{ session.timeslot.date }} at {{ session.timeslot.start_time }} – {{ session.subject }}
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No past sessions.</p>
+{% endif %}
+
+<hr>
+
+<a href="{% url 'make_appointment' %}">Make a new appointment</a>
+
+<form method="post" action="{% url 'logout' %}" style="display:inline;">
+  {% csrf_token %}
+  <button type="submit">Log out</button>
+</form>
+
+{% endblock %}
