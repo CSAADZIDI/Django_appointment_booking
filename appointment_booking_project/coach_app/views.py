@@ -16,7 +16,7 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponseForbidden
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'home.html', {'is_home': True})
 
 
 class CustomLoginView(LoginView):

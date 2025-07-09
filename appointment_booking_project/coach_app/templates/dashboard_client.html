@@ -1,43 +1,68 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Dashboard - Client</h2>
+<h2 class="text-2xl font-bold mb-4">Dashboard - Client</h2>
 
-<h3>Upcoming Sessions</h3>
+<h3 class="text-xl font-semibold mb-2">Upcoming Sessions</h3>
 {% if upcoming_sessions %}
-    <ul>
-    {% for session in upcoming_sessions %}
-        <li>
-            {{ session.timeslot.date }} at {{ session.timeslot.start_time }} – {{ session.subject }}
-        </li>
-    {% endfor %}
-    </ul>
+    <div class="overflow-x-auto mb-6">
+        <table class="min-w-full table-auto border border-gray-300 rounded-lg shadow-sm">
+            <thead class="bg-gray-100 text-left">
+                <tr>
+                    <th class="px-4 py-2 border-b">Date</th>
+                    <th class="px-4 py-2 border-b">Time</th>
+                    <th class="px-4 py-2 border-b">Subject</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for session in upcoming_sessions %}
+                <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-2 border-b">{{ session.timeslot.date }}</td>
+                    <td class="px-4 py-2 border-b">{{ session.timeslot.start_time }}</td>
+                    <td class="px-4 py-2 border-b">{{ session.subject }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% else %}
-    <p>No upcoming sessions.</p>
+    <p class="text-gray-500 mb-6">No upcoming sessions.</p>
 {% endif %}
 
-<hr>
-
-<h3>Past Sessions</h3>
+<h3 class="text-xl font-semibold mb-2">Past Sessions</h3>
 {% if past_sessions %}
-    <ul>
-    {% for session in past_sessions %}
-        <li>
-            {{ session.timeslot.date }} at {{ session.timeslot.start_time }} – {{ session.subject }}
-        </li>
-    {% endfor %}
-    </ul>
+    <div class="overflow-x-auto mb-6">
+        <table class="min-w-full table-auto border border-gray-300 rounded-lg shadow-sm">
+            <thead class="bg-gray-100 text-left">
+                <tr>
+                    <th class="px-4 py-2 border-b">Date</th>
+                    <th class="px-4 py-2 border-b">Time</th>
+                    <th class="px-4 py-2 border-b">Subject</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for session in past_sessions %}
+                <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-2 border-b">{{ session.timeslot.date }}</td>
+                    <td class="px-4 py-2 border-b">{{ session.timeslot.start_time }}</td>
+                    <td class="px-4 py-2 border-b">{{ session.subject }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% else %}
-    <p>No past sessions.</p>
+    <p class="text-gray-500 mb-6">No past sessions.</p>
 {% endif %}
 
-<hr>
+<hr class="my-6">
 
-<a href="{% url 'make_appointment' %}">Make a new appointment</a>
+<div class="flex items-center justify-between">
+    <a href="{% url 'make_appointment' %}" class="text-blue-600 hover:underline">Make a new appointment</a>
 
-<form method="post" action="{% url 'logout' %}" style="display:inline;">
-  {% csrf_token %}
-  <button type="submit">Log out</button>
-</form>
-
+    <form method="post" action="{% url 'logout' %}" class="inline">
+      {% csrf_token %}
+      <button type="submit" class="ml-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Log out</button>
+    </form>
+</div>
 {% endblock %}

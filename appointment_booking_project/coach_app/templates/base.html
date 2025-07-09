@@ -1,4 +1,4 @@
-{% load static%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -8,36 +8,23 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     {% block extra_head %}{% endblock %}
 </head>
-<body class="bg-white text-gray-800 font-sans">
+<body class="bg-white text-gray-800 font-sans pt-20"> <!-- Added pt-20 for fixed header spacing -->
 
-    <!-- Navigation -->
-    <header class="bg-white shadow">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="/" class="text-2xl font-bold text-blue-600"> Hi there — I'm Coach Tito! </a>
-<nav class="space-x-6">
-    <a href="{% url 'home' %}" class="text-gray-600 hover:text-blue-600">Home</a>
-    <a href="{% url 'login' %}" class="text-gray-600 hover:text-blue-600">Log in</a>
-    <a href="{% url 'signup' %}" class="text-gray-600 hover:text-blue-600">Sign up</a>
-</nav>
+    <!-- Fixed Header -->
+    <header class="bg-white shadow fixed top-0 left-0 w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-center items-center">
+            <nav class="space-x-6">
+                <a href="{% url 'home' %}" class="text-gray-600 hover:text-blue-600">Home</a>
+                <a href="{% url 'login' %}" class="text-gray-600 hover:text-blue-600">Log in</a>
+                <a href="{% url 'signup' %}" class="text-gray-600 hover:text-blue-600">Sign up</a>
+            </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="bg-pink-100 py-16 text-center">
-        <div class="max-w-3xl mx-auto">
-            <h1 class="text-4xl md:text-5xl font-bold text-pink-800 mb-6">
-                Awaken your inner Superhero ... with Tito 
-            </h1>
-            <p class="text-lg text-gray-700 mb-6">
-                Life coaching to help you reveal your potential.
-            </p>
 
-        </div>
-                   
-    </section>
 
     <!-- Dynamic Content -->
-    <main class="py-12 px-4 max-w-7xl mx-auto">
+    <main class="m-0 p-0">
         {% block content %}{% endblock %}
     </main>
 
@@ -45,13 +32,8 @@
     <footer class="bg-gray-100 py-8">
         <div class="max-w-7xl mx-auto px-4 text-center text-gray-600">
             <p>&copy; {{ current_year }} All rights reserved.</p>
-
         </div>
     </footer>
 
 </body>
 </html>
-
-
-
-
