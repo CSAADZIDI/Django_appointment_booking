@@ -22,4 +22,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('', include('coach_app.urls')),
     path('api/', include('api.urls')),
+    path('chatbot/', include('chatbot.urls')),
 ]

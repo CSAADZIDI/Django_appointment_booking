@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'coach_app',
     'api',
+    'chatbot',
     "django.contrib.admin",
     "django.contrib.auth",
     'django.contrib.sessions',

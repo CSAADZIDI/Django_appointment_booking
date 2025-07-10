@@ -1,18 +1,21 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<section class="bg-white text-center m-0 p-0">
-    <div class="max-w-3xl mx-auto">
-        <img src="static/images/coach.jpg" alt="Awaken your inner Superhero with Tito" class="mx-auto rounded-lg shadow-lg" />
-    </div>
-</section>
+<!-- Hero Image Section -->
+<div class="mx-auto">
+    <img src="{% static 'images/coach.jpg' %}" alt="Awaken your inner Superhero with Tito"
+         class="w-full h-auto rounded-none shadow-none" />
+</div>
+
+<!-- About / Services / Appointments -->
 <div class="max-w-5xl mx-auto mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 px-4">
     <!-- About Me Card -->
     <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
         <h3 class="text-xl font-semibold mb-4">About Me</h3>
         <p>
             <strong>Welcome — I'm Tito, Your Personal Development Coach</strong><br><br>
-            I'm here to help you unlock your full potential and create meaningful change in both your personal and professional life. Through tailored guidance and empowering support, I’ll walk with you on your journey toward growth, clarity, and confidence.
+            I'm here to help you unlock your full potential and create meaningful change in both your personal and professional life.
         </p>
     </div>
 
@@ -37,9 +40,15 @@
             9 a.m. to 6 p.m.<br><br>
 
             📅 <strong>To make an appointment:</strong><br>
-            Please contact create an account and use the booking form if available on the site.<br>
+            Please 
+            <a href="{% url 'signup' %}" class="text-gray-600 hover:text-blue-600"> Create an account </a>
             
+            and use the booking form.
         </p>
     </div>
 </div>
+
+<!-- Chatbot Widget -->
+{% csrf_token %}
+{% include 'chatbot/widget.html' %}
 {% endblock %}

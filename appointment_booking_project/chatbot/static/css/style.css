@@ -1,0 +1,70 @@
+/* Floating Chat Icon */
+#chat-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 120px;
+    /* Increased size */
+    height: 80px;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+    padding: 5px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#chat-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 60%;
+    display: block;
+    background-color: #154a85;
+    /* optional: for transparent images */
+    image-rendering: crisp-edges;
+    /* improve sharpness on some browsers */
+}
+
+/* Hover and click animation */
+#chat-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+#chat-icon:active {
+    transform: scale(0.95);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Chat Container */
+#botui-container {
+    position: fixed;
+    bottom: 130px;
+    /* Adjusted based on bigger icon */
+    right: 20px;
+    width: 320px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    display: none;
+    z-index: 1000;
+}
+
+/* BotUI overrides (optional, for better spacing) */
+#botui-container .botui-message-content {
+    font-size: 14px;
+    line-height: 1.4;
+    padding: 8px 12px;
+}
+
+#botui-container .botui-actions-text-input {
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    padding: 6px 10px;
+}

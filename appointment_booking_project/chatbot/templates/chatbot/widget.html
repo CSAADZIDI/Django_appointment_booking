@@ -1,0 +1,71 @@
+{% load static %}
+
+<!-- Link to custom CSS -->
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<!-- BotUI CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/botui/build/botui.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/botui/build/botui-theme-default.css">
+
+<!-- Floating Chat Icon -->
+<div id="chat-icon" onclick="toggleChat()">
+  <img src="{% static 'images/chat_with_tito.jpg' %}" alt="Chat Icon" />
+</div>
+
+<!-- Chat Container -->
+<div id="botui-container">
+  <div id="botui-app">
+    <bot-ui></bot-ui>
+  </div>
+</div>
+
+<!-- Vue & BotUI JS -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/botui/build/botui.min.js"></script>
+
+<!-- CSRF Token -->
+<script>
+  const csrftoken = '{{ csrf_token }}';
+</script>
+
+<!-- Chatbot Logic -->
+<script>
+  var botui = null;
+
+  function toggleChat() {
+    const chat = document.getElementById('botui-container');
+    chat.style.display = (chat.style.display === 'none') ? 'block' : 'none';
+    if (!botui) {
+      startBot();
+    }
+  }
+
+  function startBot() {
+    botui = new BotUI('botui-app');
+    botui.message.add({ content: 'Hello ! How can I help you ? (Write "merci" to exit)' })
+      .then(() => askUser());
+  }
+
+  function askUser() {
+    botui.action.text({ action: { placeholder: 'Your message...' } })
+      .then(res => {
+        const msg = res.value.trim().toLowerCase();
+        if (msg === 'merci') {
+          return botui.message.add({ content: 'With plaisir 😊 ! See you soon.' });
+        }
+
+        fetch('/chatbot/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': csrftoken
+          },
+          body: 'message=' + encodeURIComponent(res.value)
+        })
+        .then(r => r.json())
+        .then(data => {
+          botui.message.add({ content: data.response }).then(() => askUser());
+        });
+      });
+  }
+</script>
